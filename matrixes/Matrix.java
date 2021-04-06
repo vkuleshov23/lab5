@@ -12,19 +12,20 @@ public class Matrix implements IMatrix{
 		this.matrix = new int[col_size][row_size];
 	}
 	@ Override
-	public final void setElement(int column, int row, int value){ //add exception
-		if((row < this.row_size && column < this.col_size) && (row >= 0 && column >= 0)){
+	public final void setElement(int column, int row, int value){
+		if((row < this.row_size && row >= 0) || (column >= 0 && column < this.col_size)){
 			this.matrix[column][row] = value;
 		} else { MatrixException e = new MatrixException("Memory access error"); throw e;}
 	}
-	public final void addElement(int column, int row, int value){ //add exception
-		if((row < this.row_size && column < this.col_size) && (row >= 0 && column >= 0)){
+	@ Override
+	public final void addElement(int column, int row, int value){
+		if((row < this.row_size && row >= 0) || (column >= 0 && column < this.col_size)){
 			this.matrix[column][row] += value;
 		} else { MatrixException e = new MatrixException("Memory access error"); throw e; }	
 	}
 	@ Override
-	public final int getElement(int column, int row){ //add exception
-		if((row < this.row_size && row >= 0) && (column >= 0 && column < this.col_size)){
+	public final int getElement(int column, int row){
+		if((row < this.row_size && row >= 0) || (column >= 0 && column < this.col_size)){
 			return this.matrix[column][row];
 		} else { MatrixException e = new MatrixException("Memory access error"); throw e; }
 	}
@@ -60,7 +61,7 @@ public class Matrix implements IMatrix{
 	}
 	@ Override
 	public Matrix sum(IMatrix tmp){	
-		if((tmp instanceof SquareMatrix) || (tmp instanceof Matrix)){
+		// if((tmp instanceof SquareMatrix) || (tmp instanceof Matrix)){
 			if ((this.col_size == tmp.getColumnSize())&&(this.row_size == tmp.getRowSize())){
 				Matrix cur = new Matrix(this.col_size, this.row_size);
 				for(int i = 0; i < this.col_size; i++){
@@ -70,11 +71,11 @@ public class Matrix implements IMatrix{
 				}
 				return cur;
 			} else { MatrixException e = new MatrixException("Matrix sizes are different"); throw e; }
-		} else { MatrixException e = new MatrixException("There is not SquareMatrix or Matrix"); throw e; }
+		// } else { MatrixException e = new MatrixException("There is not SquareMatrix or Matrix"); throw e; }
 	}
 	@ Override
 	public Matrix product(IMatrix tmp){
-		if((tmp instanceof SquareMatrix) || (tmp instanceof Matrix)){
+		// if((tmp instanceof SquareMatrix) || (tmp instanceof Matrix)){
 			if (this.row_size == tmp.getColumnSize()){
 				Matrix cur = new Matrix(this.col_size, tmp.getRowSize());
 				for(int i = 0; i < cur.col_size; i++){
@@ -86,7 +87,7 @@ public class Matrix implements IMatrix{
 				}
 				return cur;
 			} else { MatrixException e = new MatrixException("Matrix sizes are different"); throw e; }
-		} else { MatrixException e = new MatrixException("There is not SquareMatrix or Matrix"); throw e; }
+		// } else { MatrixException e = new MatrixException("There is not SquareMatrix or Matrix"); throw e; }
 	}
 	@ Override
 	public String toString(){ 

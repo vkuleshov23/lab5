@@ -19,7 +19,7 @@ public class SquareMatrix extends Matrix implements IMatrix{
 	}
 	@ Override
 	public SquareMatrix sum( IMatrix tmp){ //add exception err
-		if((tmp instanceof SquareMatrix) || (tmp instanceof Matrix)) {
+		// if((tmp instanceof SquareMatrix) || (tmp instanceof Matrix)) {
 			if ((this.col_size == tmp.getColumnSize())&&(this.row_size == tmp.getRowSize())){
 				SquareMatrix cur = new SquareMatrix(this.size, 0);
 				for(int i = 0; i < this.getSize(); i++){
@@ -29,11 +29,11 @@ public class SquareMatrix extends Matrix implements IMatrix{
 				}
 				return cur;
 			} else { MatrixException e = new MatrixException("Matrix sizes are different"); throw e; }
-		} else { MatrixException e = new MatrixException("There is not SquareMatrix or Matrix"); throw e; }
+		// } else { MatrixException e = new MatrixException("There is not SquareMatrix or Matrix"); throw e; }
 	}
 	@ Override
 	public SquareMatrix product( IMatrix tmp){	
-		if((tmp instanceof SquareMatrix) || (tmp instanceof Matrix)){
+		// if((tmp instanceof SquareMatrix) || (tmp instanceof Matrix)){
 			if (this.row_size == tmp.getColumnSize()){
 				SquareMatrix cur = new SquareMatrix(this.size, 0);
 				for(int i = 0; i < this.getColumnSize(); i++){
@@ -45,7 +45,7 @@ public class SquareMatrix extends Matrix implements IMatrix{
 				}
 				return cur;
 			} else { MatrixException e = new MatrixException("Matrix sizes are different"); throw e; }
-		} else { MatrixException e = new MatrixException("There is not SquareMatrix or Matrix"); throw e; }
+		// } else { MatrixException e = new MatrixException("There is not SquareMatrix or Matrix"); throw e; }
 	}
 	@ Override
 	public String toString(){ 

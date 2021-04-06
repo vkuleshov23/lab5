@@ -6,26 +6,26 @@ public class main{
 		try {
 			System.out.println("-------------------Default Matrix check-----------------------");
 
-			Matrix a = new Matrix(6, 3);
+			Matrix a1 = new Matrix(6, 3);
 			Matrix b = new Matrix(3, 4);
 			for(int i = 0; i < 3; i++){
 				b.setElement(i, i, 2);
-				a.setElement(i, i, 3);
+				a1.setElement(i, i, 3);
 			}
 			b.setElement(2, 1, 5);
 			b.setElement(0, 2, 4);
 			b.setElement(0, 1, 6);
-			a.setElement(0, 1, 4);
-			a.setElement(3, 2, 7);
-			a.setElement(2, 0, 12);
-			a.setElement(5, 1, 13);
+			a1.setElement(0, 1, 4);
+			a1.setElement(3, 2, 7);
+			a1.setElement(2, 0, 12);
+			a1.setElement(5, 1, 13);
 
-			System.out.println("a:");
-			System.out.println(a);
+			System.out.println("a1:");
+			System.out.println(a1);
 			System.out.println("b:");
 			System.out.println(b);
-				 a = a.product(b);
-			System.out.println("a = a*b:");
+			Matrix a = a1.product(b);
+			System.out.println("a = a1*b:");
 			System.out.println(a);
 		
 			Matrix c = new Matrix(6, 4);
@@ -50,6 +50,10 @@ public class main{
 			ab.setElement(5, 3, 53);
 			System.out.println("ab size: " + ab.getColumnSize() + " " + ab.getRowSize() + "\nab: \n" + ab);
 			System.out.println("ab+(c+a):\n" + ab.sum(c.sum(a)));
+			System.out.println("ab+ab:\n" + ab.sum(ab));
+			ab.setElement(0, 5, 5);
+			System.out.println("''with more size'' ab:\n" + ab);
+			System.out.println("ab*a1:\n" + ab.product(a1));
 
 
 			System.out.println("-------------------Square Matrix check-----------------------");
@@ -58,7 +62,7 @@ public class main{
 			w.setElement(2, 1, 7);
 			w.setElement(1, 2, 8);
 			w.setElement(0, 0, 9);
-			System.out.println("(UsualMatrix) w:\n"+w);
+			System.out.println("(UsualMatrix) w:\n" + w);
 
 			SquareMatrix d = new SquareMatrix(3);
 			d.setElement(2, 1, 5);
@@ -85,43 +89,6 @@ public class main{
 			System.out.println("a+c == c+a? : " + (c.sum(a)).equals(a.sum(c)));
 			System.out.println("d == e? : " + d.equals(e));
 			System.out.println("d == a? (different classes) : " + d.equals(a));
-			// System.out.println("-------------------Default Vector check-----------------------");
-			// Vector f = new Vector();
-			// for (int i = 0; i < 5; i++) {
-			// 	f.pushBack(i+(i*2));
-			// }
-			// System.out.println(f);
-
-			// Vector g = new Vector();
-			// for (int i = 0; i < 6; i++) {
-			// 	g.pushBack(i+((i-1)*3));
-			// }
-			// System.out.println(g);
-			// System.out.println(g.sum(f));
-			// System.out.println(f.sum(g));
-			// System.out.println(g.productForVector(c));
-			// System.out.println(g.productForMatrix(c.sum(a)));
-			
-			// System.out.println("-------------------Mirror Vector check-----------------------");
-		
-			// MirrorVector h = new MirrorVector();
-			// for (int i = 0; i < 5; i++) {
-			// 	h.pushBack(i+(i*5));
-			// }
-			// System.out.println("size: "+ h.empty() + ": " + h);
-
-			// MirrorVector l = new MirrorVector();
-			// for (int i = 0; i < 3; i++) {
-			// 	l.pushBack(i);
-			// }
-
-			// System.out.println("get(5): "+ l.get(5));
-			// System.out.println(l);
-
-			// System.out.println(l.sum(h));
-			// System.out.println(h.sum(l));
-			// System.out.println("product: " + l.productForVector(c));
-			// System.out.println("product: " + l.productForMatrix(c));
 
 			System.out.println("-------------------Exception check-----------------------");
 			System.out.println("c+b(must be error):\n");

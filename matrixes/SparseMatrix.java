@@ -41,7 +41,6 @@ public class SparseMatrix implements IMatrix{
 			throw e;
 		}
 		SMEl cur = new SMEl(column_, row_, value_);
-		int i = 0;
 	    ListIterator<SMEl> iter = this.matrix.listIterator();
 	    while (iter.hasNext()) {
 	      SMEl element = iter.next();
@@ -70,7 +69,6 @@ public class SparseMatrix implements IMatrix{
 	    		}
 	        	return;
 	        }
-	        i++;
 	    }
 	    this.matrix.addLast(cur);
 		if(this.row_size < cur.row+1){
@@ -78,20 +76,68 @@ public class SparseMatrix implements IMatrix{
 	        if(this.col_size < cur.column+1){
 	        	this.col_size = cur.column+1;
 	        }
-	    }	  
+	    }
 	}
+	public final void addElement(int column_, int row_, int value_){
+		if(column_ < 0 || row_ < 0) {
+			MatrixException e = new MatrixException("Memory access error");
+			throw e;
+		}
+		SMEl cur = new SMEl(column_, row_, value_);
+	    ListIterator<SMEl> iter = this.matrix.listIterator();
+	    while (iter.hasNext()) {
+	      SMEl element = iter.next();
+	        if(cur.row == element.row && cur.column == element.column){
+	        	cur.value += element.value;
+	        	iter.set(cur);
+	        	return;
+	        } else if(cur.row < element.row && cur.column == element.column){
+	        	iter.previous();
+	        	iter.add(cur);
+	        	iter.next();
+	        	if(this.row_size < cur.row+1){
+	          		this.row_size = cur.row+1;
+	        	}
+	        	return;
+	        } else if(cur.column < element.column){
+	        	iter.previous();
+	        	iter.add(cur);
+	        	iter.next();
+	        	if(this.row_size < cur.row+1){
+	        		this.row_size = cur.row+1;
+	        		if(this.col_size < cur.column+1){
+	        			this.col_size = cur.column+1;
+	        		}
+	    		}
+	        	return;
+	        }
+	    }
+	    this.matrix.addLast(cur);
+		if(this.row_size < cur.row+1){
+	        this.row_size = cur.row+1;
+	        if(this.col_size < cur.column+1){
+	        	this.col_size = cur.column+1;
+	        }
+	    }	}
 	@ Override
 	public int getElement(int column, int row){
-		if(column >= this.col_size && row >= row_size){
+		if((row < this.row_size && row >= 0) || (column >= 0 && column < this.col_size)){
+			for(SMEl element : this.matrix){
+				if(element.column > column){
+					return 0;
+				} else if(element.column == column){
+					if(element.row == row){
+						return element.value;
+					} else if(element.row > row){
+						return 0;
+					}
+				}
+			}
+			return 0;			
+		} else {
 			MatrixException e = new MatrixException("Memory access error"); 
 			throw e;
 		}
-		for(SMEl element : this.matrix){
-			if(element.row == row && element.column == column){
-				return element.value;
-			}
-		}
-		return 0;
 	}
 	@ Override
 	public final int getColumnSize(){
@@ -129,7 +175,17 @@ public class SparseMatrix implements IMatrix{
 	}
 	@ Override
 	public final SparseMatrix product(IMatrix tmp){
-		return this;
+		if (this.row_size == tmp.getColumnSize()){
+			SparseMatrix cur = new SparseMatrix(this.col_size, tmp.getRowSize() );
+			for (int i = 0; i < cur.col_size; i++) {
+				for (int j = 0; j < cur.row_size; j++) {
+					for (int k = 0; k < this.row_size; k++) {
+	    				cur.addElement(i, j, this.getElement(i, k) * (tmp.getElement(k, j)) );
+	    			}	
+				}
+			}
+			return cur;
+		} else { MatrixException e = new MatrixException("Memory access error"); throw e; }
 	}
 	public final void remove(int column, int row){
 	    for (Iterator<SMEl> iter = this.matrix.iterator(); iter.hasNext(); ) {
@@ -166,10 +222,6 @@ public class SparseMatrix implements IMatrix{
 	    	}
 	    	str.append("\n");
 	    }
-	    // for(int number : this.matrix){
-	    //     str.append(number);
-	    // } iter.hasNext()
-	    // SMEl element = iter.next();
 	    return str.toString(); 
 	  }
 }
