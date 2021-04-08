@@ -6,6 +6,8 @@ public class main{
 		try {
 			System.out.println("-------------------Default Matrix check-----------------------");
 
+			int max = 60;
+
 			Matrix a1 = new Matrix(6, 3);
 			Matrix b = new Matrix(3, 4);
 			for(int i = 0; i < 3; i++){
@@ -54,6 +56,29 @@ public class main{
 			ab.setElement(0, 5, 5);
 			System.out.println("''with more size'' ab:\n" + ab);
 			System.out.println("ab*a1:\n" + ab.product(a1));
+			ab.remove(0, 5);
+			ab.remove(5, 3);
+			System.out.println("remove elements (0 5, 5 3, then shrinkToFit())");
+			System.out.println("ab size: " + ab.getColumnSize() + " " + ab.getRowSize() + "\nab: \n" + ab);
+			ab.shrinkToFit();
+			System.out.println("ab size: " + ab.getColumnSize() + " " + ab.getRowSize() + "\nab: \n" + ab);
+			ab.setElement(max, max, 1111);
+			ab.starFill(max);
+			System.out.println("ab size: " + ab.getColumnSize() + " " + ab.getRowSize() + "\nab: \n" + ab);
+			
+			Matrix ac = new Matrix(max+1, max+1);
+			ac.starFill(max);
+			System.out.println("ac size: " + ac.getColumnSize() + " " + ac.getRowSize() + "\nac: \n" + ac);
+			System.out.println("ab+ac:\n" + ab.sum(ac));
+			System.out.println("ab+ac:\n" + ab.sum(ac));
+			System.out.println("ab*ac:\n" + ab.product(ac));
+			System.out.println("ac*ab:\n" + ac.product(ab));
+			System.out.println("ac*ac:\n" + ac.product(ac));
+			ac.fill(max);
+			System.out.println("ac size: " + ac.getColumnSize() + " " + ac.getRowSize() + "\nac: \n" + ac);
+			ab.removeAll();
+			ab.fill(max);
+			System.out.println("ab size: " + ab.getColumnSize() + " " + ab.getRowSize() + "\nab: \n" + ab);
 
 
 			System.out.println("-------------------Square Matrix check-----------------------");
@@ -90,9 +115,9 @@ public class main{
 			System.out.println("d == e? : " + d.equals(e));
 			System.out.println("d == a? (different classes) : " + d.equals(a));
 
-			System.out.println("-------------------Exception check-----------------------");
-			System.out.println("c+b(must be error):\n");
-			c.sum(b);
+			// System.out.println("-------------------Exception check-----------------------");
+			// System.out.println("c+b(must be error):\n");
+			// c.sum(b);
 
 
 		} catch(MatrixException err){

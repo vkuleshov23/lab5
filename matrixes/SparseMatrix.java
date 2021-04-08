@@ -40,6 +40,15 @@ public class SparseMatrix implements IMatrix{
 			MatrixException e = new MatrixException("Memory access error");
 			throw e;
 		}
+		if(value_ == 0){
+			if(this.row_size < row_+1){
+	        	this.row_size = row_+1;
+	        	if(this.col_size < column_+1){
+	        		this.col_size = column_+1;
+	        	}
+	    	}
+			return;
+		}
 		SMEl cur = new SMEl(column_, row_, value_);
 	    ListIterator<SMEl> iter = this.matrix.listIterator();
 	    while (iter.hasNext()) {
@@ -83,6 +92,9 @@ public class SparseMatrix implements IMatrix{
 			MatrixException e = new MatrixException("Memory access error");
 			throw e;
 		}
+		if(value_ == 0){
+			return;
+		}
 		SMEl cur = new SMEl(column_, row_, value_);
 	    ListIterator<SMEl> iter = this.matrix.listIterator();
 	    while (iter.hasNext()) {
@@ -118,7 +130,8 @@ public class SparseMatrix implements IMatrix{
 	        if(this.col_size < cur.column+1){
 	        	this.col_size = cur.column+1;
 	        }
-	    }	}
+	    }	
+	}
 	@ Override
 	public int getElement(int column, int row){
 		if((row < this.row_size && row >= 0) || (column >= 0 && column < this.col_size)){
@@ -195,6 +208,57 @@ public class SparseMatrix implements IMatrix{
 	    		return;
 	    	}
 	    }
+	}
+	public final void removeAll(){
+		 for (Iterator<SMEl> iter = this.matrix.iterator(); iter.hasNext(); ) {
+	    	SMEl element = iter.next();
+	        iter.remove();
+	    }
+	}
+	public final void starFill(int max){
+		for(int i = 0; i < max; i++){
+			this.setElement(i, i, (int)(Math.random()*100));
+			this.setElement((i/2), (i/3), (int)(Math.random()*100));
+			this.setElement((i/3), (i/2), (int)(Math.random()*100));
+			this.setElement((i/4), (i/5), (int)(Math.random()*100));
+			this.setElement((i/5), (i/4), (int)(Math.random()*100));
+			this.setElement(max-(i/2), max-(i/3), (int)(Math.random()*100));
+			this.setElement(max-(i/3), max-(i/2), (int)(Math.random()*100));
+			this.setElement(max-(i/4), max-(i/5), (int)(Math.random()*100));
+			this.setElement(max-(i/5), max-(i/4), (int)(Math.random()*100));
+			this.setElement(max-i, i, (int)(Math.random()*100));
+			this.setElement(max-(i/2), (i/3), (int)(Math.random()*100));
+			this.setElement(max-(i/3), (i/2), (int)(Math.random()*100));
+			this.setElement(max-(i/4), (i/5), (int)(Math.random()*100));
+			this.setElement(max-(i/5), (i/4), (int)(Math.random()*100));
+			this.setElement((i/2), max-(i/3), (int)(Math.random()*100));
+			this.setElement((i/3), max-(i/2), (int)(Math.random()*100));
+			this.setElement((i/4), max-(i/5), (int)(Math.random()*100));
+			this.setElement((i/5), max-(i/4), (int)(Math.random()*100));
+		}
+	}
+	public final void fill(int max){
+		for (int i = 0; i <= max; i++) {
+			for (int j = 0; j <= max; j++) {
+				if(i != j){
+					this.setElement(i, j, (int)(Math.random()*10));
+				}
+			}
+		}
+	}
+	public final void shrinkToFit(){
+		int max_col = -1;
+		int max_row = -1;
+		for(SMEl element : this.matrix){
+			if(element.row > max_row){
+				max_row = element.row;
+			}
+			if(element.column > max_col){
+				max_col = element.column;
+			}
+		}
+		this.col_size = max_col+1;
+		this.row_size = max_row+1;	
 	}
 	public boolean equals(Object tmp) {
 	      if(tmp instanceof SparseMatrix)
