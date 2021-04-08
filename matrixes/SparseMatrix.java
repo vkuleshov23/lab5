@@ -241,7 +241,7 @@ public class SparseMatrix implements IMatrix{
 		for (int i = 0; i <= max; i++) {
 			for (int j = 0; j <= max; j++) {
 				if(i != j){
-					this.setElement(i, j, (int)(Math.random()*10));
+					this.setElement(i, j, (int)(Math.random()* 9) + 1);
 				}
 			}
 		}
