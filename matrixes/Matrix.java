@@ -37,22 +37,22 @@ public class Matrix implements IMatrix{
 	public final int getRowSize(){
 		return this.row_size;
 	}
-	public final int[] getColumn(int n){
-		if (n < this.row_size && n >= 0){
+	public final int[] getColumn(int row){
+		if (row < this.row_size && row >= 0){
 			int[] tmp = new int[this.col_size];
 			for (int i = 0; i < this.col_size; i++) {
-				tmp[i] = this.matrix[i][n];
+				tmp[i] = this.matrix[i][row];
 			}
 			return tmp;
 		} else {
 			MatrixException e = new MatrixException("Memory access error"); throw e;
 		}
 	}
-	protected final int[] getRow(int n){
-		if (n < this.col_size && n >= 0){
+	public final int[] getRow(int column){
+		if (column < this.col_size && column >= 0){
 			int[] tmp = new int[this.row_size];
-			for (int i = 0; i < this.row_size; i++) {
-				tmp[i] = this.matrix[n][i];
+			for (int j = 0; j < this.row_size; j++) {
+				tmp[j] = this.matrix[column][j];
 			}
 			return tmp;
 		} else {
@@ -61,7 +61,6 @@ public class Matrix implements IMatrix{
 	}
 	@ Override
 	public Matrix sum(IMatrix tmp){	
-		// if((tmp instanceof SquareMatrix) || (tmp instanceof Matrix)){
 			if ((this.col_size == tmp.getColumnSize())&&(this.row_size == tmp.getRowSize())){
 				Matrix cur = new Matrix(this.col_size, this.row_size);
 				for(int i = 0; i < this.col_size; i++){
@@ -71,11 +70,9 @@ public class Matrix implements IMatrix{
 				}
 				return cur;
 			} else { MatrixException e = new MatrixException("Matrix sizes are different"); throw e; }
-		// } else { MatrixException e = new MatrixException("There is not SquareMatrix or Matrix"); throw e; }
 	}
 	@ Override
 	public Matrix product(IMatrix tmp){
-		// if((tmp instanceof SquareMatrix) || (tmp instanceof Matrix)){
 			if (this.row_size == tmp.getColumnSize()){
 				Matrix cur = new Matrix(this.col_size, tmp.getRowSize());
 				for(int i = 0; i < cur.col_size; i++){
@@ -87,28 +84,27 @@ public class Matrix implements IMatrix{
 				}
 				return cur;
 			} else { MatrixException e = new MatrixException("Matrix sizes are different"); throw e; }
-		// } else { MatrixException e = new MatrixException("There is not SquareMatrix or Matrix"); throw e; }
 	}
 	public final void starFill(int max){
 		for(int i = 0; i < max; i++){
-			this.setElement(i, i, (int)(Math.random()*100));
-			this.setElement((i/2), (i/3), (int)(Math.random()*100));
-			this.setElement((i/3), (i/2), (int)(Math.random()*100));
-			this.setElement((i/4), (i/5), (int)(Math.random()*100));
-			this.setElement((i/5), (i/4), (int)(Math.random()*100));
-			this.setElement(max-(i/2), max-(i/3), (int)(Math.random()*100));
-			this.setElement(max-(i/3), max-(i/2), (int)(Math.random()*100));
-			this.setElement(max-(i/4), max-(i/5), (int)(Math.random()*100));
-			this.setElement(max-(i/5), max-(i/4), (int)(Math.random()*100));
-			this.setElement(max-i, i, (int)(Math.random()*100));
-			this.setElement(max-(i/2), (i/3), (int)(Math.random()*100));
-			this.setElement(max-(i/3), (i/2), (int)(Math.random()*100));
-			this.setElement(max-(i/4), (i/5), (int)(Math.random()*100));
-			this.setElement(max-(i/5), (i/4), (int)(Math.random()*100));
-			this.setElement((i/2), max-(i/3), (int)(Math.random()*100));
-			this.setElement((i/3), max-(i/2), (int)(Math.random()*100));
-			this.setElement((i/4), max-(i/5), (int)(Math.random()*100));
-			this.setElement((i/5), max-(i/4), (int)(Math.random()*100));
+			this.setElement(i, i, (int)(Math.random()* 9) + 1);
+			this.setElement((i/2), (i/3), (int)(Math.random()* 9) + 1);
+			this.setElement((i/3), (i/2), (int)(Math.random()* 9) + 1);
+			this.setElement((i/4), (i/5), (int)(Math.random()* 9) + 1);
+			this.setElement((i/5), (i/4), (int)(Math.random()* 9) + 1);
+			this.setElement(max-(i/2), max-(i/3), (int)(Math.random()* 9) + 1);
+			this.setElement(max-(i/3), max-(i/2), (int)(Math.random()* 9) + 1);
+			this.setElement(max-(i/4), max-(i/5), (int)(Math.random()* 9) + 1);
+			this.setElement(max-(i/5), max-(i/4), (int)(Math.random()* 9) + 1);
+			this.setElement(max-i, i, (int)(Math.random()* 9) + 1);
+			this.setElement(max-(i/2), (i/3), (int)(Math.random()* 9) + 1);
+			this.setElement(max-(i/3), (i/2), (int)(Math.random()* 9) + 1);
+			this.setElement(max-(i/4), (i/5), (int)(Math.random()* 9) + 1);
+			this.setElement(max-(i/5), (i/4), (int)(Math.random()* 9) + 1);
+			this.setElement((i/2), max-(i/3), (int)(Math.random()* 9) + 1);
+			this.setElement((i/3), max-(i/2), (int)(Math.random()* 9) + 1);
+			this.setElement((i/4), max-(i/5), (int)(Math.random()* 9) + 1);
+			this.setElement((i/5), max-(i/4), (int)(Math.random()* 9) + 1);
 		}
 	}
 	public final void fill(int max){
