@@ -190,7 +190,7 @@ public class SparseMatrix implements IMatrix{
 					int[] curRow = new int[row_size];
 					for (int m = 0; m < row_size; m++) curRow[m] = 0; //zero filling (if no such element)
 
-	    			for (; rowElement.column == x;) {                 // wind all elements, wich have 'x' colum
+	    			for (; rowElement.column == x;) {                 // find all elements, wich have 'x' colum
 	    				curRow[rowElement.row] = rowElement.value;
 						if(rowTaker.hasNext()){                       //taking next or end
 	    					rowElement = rowTaker.next();	    			
@@ -206,10 +206,12 @@ public class SparseMatrix implements IMatrix{
 			for (int i = 0; i < cur.col_size; i++) {
 				tmpRow = taker.getRow(i);    // taking 'i' row
 				for (int j = 0; j < cur.row_size; j++) {
+					int intersect = 0;
 					for (int k = 0; k < this.row_size; k++) {
 	    				// cur.addElement(i, j, this.getElement(i, k) * (tmp.getElement(k, j)) );
-	    				cur.addElement(i, j, tmpRow[k] * (tmp.getElement(k, j)) ); //fast accessing an array element of current row for SparseMatrix
+	    				intersect += tmpRow[k] * (tmp.getElement(k, j));  //fast accessing an array element of current row for SparseMatrix
 	    			}	
+	    			cur.addElement(i, j, intersect );
 				}
 			}
 			return cur;

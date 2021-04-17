@@ -87,24 +87,57 @@ public class Matrix implements IMatrix{
 	}
 	public final void starFill(int max){
 		for(int i = 0; i < max; i++){
-			this.setElement(i, i, (int)(Math.random()* 9) + 1);
-			this.setElement((i/2), (i/3), (int)(Math.random()* 9) + 1);
-			this.setElement((i/3), (i/2), (int)(Math.random()* 9) + 1);
-			this.setElement((i/4), (i/5), (int)(Math.random()* 9) + 1);
-			this.setElement((i/5), (i/4), (int)(Math.random()* 9) + 1);
-			this.setElement(max-(i/2), max-(i/3), (int)(Math.random()* 9) + 1);
-			this.setElement(max-(i/3), max-(i/2), (int)(Math.random()* 9) + 1);
-			this.setElement(max-(i/4), max-(i/5), (int)(Math.random()* 9) + 1);
-			this.setElement(max-(i/5), max-(i/4), (int)(Math.random()* 9) + 1);
-			this.setElement(max-i, i, (int)(Math.random()* 9) + 1);
-			this.setElement(max-(i/2), (i/3), (int)(Math.random()* 9) + 1);
-			this.setElement(max-(i/3), (i/2), (int)(Math.random()* 9) + 1);
-			this.setElement(max-(i/4), (i/5), (int)(Math.random()* 9) + 1);
-			this.setElement(max-(i/5), (i/4), (int)(Math.random()* 9) + 1);
-			this.setElement((i/2), max-(i/3), (int)(Math.random()* 9) + 1);
-			this.setElement((i/3), max-(i/2), (int)(Math.random()* 9) + 1);
-			this.setElement((i/4), max-(i/5), (int)(Math.random()* 9) + 1);
-			this.setElement((i/5), max-(i/4), (int)(Math.random()* 9) + 1);
+			//--------------------------diagonals----------------------------------------//
+			this.setElement(i, i, (int)(Math.random()* 9) + 11);
+			this.setElement((i/2), (i/3), (int)(Math.random()* 9) + 11);
+			this.setElement((i/3), (i/2), (int)(Math.random()* 9) + 11);
+			this.setElement((i/4), (i/5), (int)(Math.random()* 9) + 11);
+			this.setElement((i/5), (i/4), (int)(Math.random()* 9) + 11);
+			this.setElement(max-(i/2), max-(i/3), (int)(Math.random()* 9) + 11);
+			this.setElement(max-(i/3), max-(i/2), (int)(Math.random()* 9) + 11);
+			this.setElement(max-(i/4), max-(i/5), (int)(Math.random()* 9) + 11);
+			this.setElement(max-(i/5), max-(i/4), (int)(Math.random()* 9) + 11);
+			this.setElement(max-i, i, (int)(Math.random()* 9) + 11);
+			this.setElement(max-(i/2), (i/3), (int)(Math.random()* 9) + 11);
+			this.setElement(max-(i/3), (i/2), (int)(Math.random()* 9) + 11);
+			this.setElement(max-(i/4), (i/5), (int)(Math.random()* 9) + 11);
+			this.setElement(max-(i/5), (i/4), (int)(Math.random()* 9) + 11);
+			this.setElement((i/2), max-(i/3), (int)(Math.random()* 9) + 11);
+			this.setElement((i/3), max-(i/2), (int)(Math.random()* 9) + 11);
+			this.setElement((i/4), max-(i/5), (int)(Math.random()* 9) + 11);
+			this.setElement((i/5), max-(i/4), (int)(Math.random()* 9) + 11);
+
+			//------------------------------top-----------------------------------------//
+
+			this.setElement((i/2), max/2 -(i/2), (int)(Math.random()* 9) + 11);
+			this.setElement((i/2), max/2 +(i/2), (int)(Math.random()* 9) + 11);
+			this.setElement(i, max/2 , (int)(Math.random()* 9) + 11);
+
+			this.setElement((i/2), max/2 -(i/3), (int)(Math.random()* 9) + 11);
+			this.setElement((i/2), max/2 +(i/3), (int)(Math.random()* 9) + 11);
+
+			this.setElement((i/2), max/2 -(i/4), (int)(Math.random()* 9) + 11);
+			this.setElement((i/2), max/2 -(i/4), (int)(Math.random()* 9) + 11);
+
+			// this.setElement(max/2-(i/2), max/2 -(i/2), (int)(Math.random()* 9) + 11);
+			// this.setElement(max/2-(i/2), max/2 +(i/2), (int)(Math.random()* 9) + 11);
+
+			//-----------------------------bot------------------------------------------------//
+
+			this.setElement(max/2+(i/2), (i/2) , (int)(Math.random()* 9) + 11);
+			this.setElement(max/2+(i/2), max-(i/2) , (int)(Math.random()* 9) + 11);
+			this.setElement(max/2, i , (int)(Math.random()* 9) + 11);
+
+			this.setElement(max-(i/2), max/2 - (i/2) , (int)(Math.random()* 9) + 11);
+			this.setElement(max-(i/2), max/2+(i/2) , (int)(Math.random()* 9) + 11);
+			
+			this.setElement(max-(i/2), max/2 + (i/3) , (int)(Math.random()* 9) + 11);
+			this.setElement(max-(i/2), max/2 - (i/3) , (int)(Math.random()* 9) + 11);
+
+			this.setElement(max-(i/2), max/2 + (i/4) , (int)(Math.random()* 9) + 11);
+			this.setElement(max-(i/2), max/2 - (i/4) , (int)(Math.random()* 9) + 11);
+
+			
 		}
 	}
 	public final void fill(int max){
@@ -113,7 +146,7 @@ public class Matrix implements IMatrix{
 				if(i == j){
 					this.setElement(i, j, 0);				
 				} else {
-					this.setElement(i, j, (int)(Math.random() * 9) + 1);
+					this.setElement(i, j, (int)(Math.random() * 9999) + 11111);
 				}
 			}
 		}

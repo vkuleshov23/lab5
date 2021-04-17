@@ -6,7 +6,7 @@ public class main{
 		try {
 			System.out.println("-------------------Default Matrix check-----------------------");
 
-			int max = 199;
+			int max = 9;
 
 			Matrix a1 = new Matrix(6, 3);
 			Matrix b = new Matrix(3, 4);
