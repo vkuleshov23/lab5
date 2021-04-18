@@ -146,7 +146,7 @@ public class Matrix implements IMatrix{
 				if(i == j){
 					this.setElement(i, j, 0);				
 				} else {
-					this.setElement(i, j, (int)(Math.random() * 9999) + 11111);
+					this.setElement(i, j, (int)(Math.random()* 9) + 1);
 				}
 			}
 		}

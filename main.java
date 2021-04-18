@@ -6,7 +6,7 @@ public class main{
 		try {
 			System.out.println("-------------------Default Matrix check-----------------------");
 
-			int max = 9;
+			int max = 4;
 
 			Matrix a1 = new Matrix(6, 3);
 			Matrix b = new Matrix(3, 4);
@@ -77,17 +77,17 @@ public class main{
 			
 			Matrix ac = new Matrix(max+1, max+1);
 			ac.starFill(max);
-			System.out.println("ac size: " + ac.getColumnSize() + " " + ac.getRowSize() + "\nac: \n" + ac);
+			// System.out.println("ac size: " + ac.getColumnSize() + " " + ac.getRowSize() + "\nac: \n" + ac);
 			
-			System.out.println("ab+ac:\n" + ab.sum(ac));
+			// System.out.println("ab+ac:\n" + ab.sum(ac));
 			
-			System.out.println("ab+ac:\n" + ab.sum(ac));
+			// System.out.println("ab+ac:\n" + ab.sum(ac));
 			
-			System.out.println("ab*ac:\n" + ab.product(ac));
+			// System.out.println("ab*ac:\n" + ab.product(ac));
 			
-			System.out.println("ac*ab:\n" + ac.product(ab));
+			// System.out.println("ac*ab:\n" + ac.product(ab));
 			
-			System.out.println("ac*ac:\n" + ac.product(ac));
+			// System.out.println("ac*ac:\n" + ac.product(ac));
 			
 			ac.fill(max);
 			System.out.println("ac size: " + ac.getColumnSize() + " " + ac.getRowSize() + "\nac: \n" + ac);
@@ -151,6 +151,26 @@ public class main{
 			// System.out.println("-------------------Exception check-----------------------");
 			// System.out.println("c+b(must be error):\n");
 			// c.sum(b);
+
+			SparseMatrix kk = new SparseMatrix();
+			kk.setElement(0, 0, 2);
+			kk.setElement(0, 1, 3);
+			kk.setElement(0, 2, 4);
+			kk.setElement(1, 0, 5);
+			kk.setElement(1, 1, 6);
+			kk.setElement(1, 2, 7);
+			System.out.println("kk:\n" + kk);
+
+			SparseMatrix ko = new SparseMatrix();
+			ko.setElement(0, 0, 9);
+			ko.setElement(0, 1, 8);
+			ko.setElement(1, 0, 7);
+			ko.setElement(1, 1, 6);
+			ko.setElement(2, 0, 5);
+			ko.setElement(2, 1, 4);
+			System.out.println("ko:\n" + ko);
+			System.out.println("kk*ko:\n" + kk.product(ko));
+
 
 
 		} catch(MatrixException err){

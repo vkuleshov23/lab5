@@ -211,7 +211,11 @@ public class SparseMatrix implements IMatrix{
 	    				// cur.addElement(i, j, this.getElement(i, k) * (tmp.getElement(k, j)) );
 	    				intersect += tmpRow[k] * (tmp.getElement(k, j));  //fast accessing an array element of current row for SparseMatrix
 	    			}	
-	    			cur.addElement(i, j, intersect );
+	    			// cur.addElement(i, j, intersect );
+	    			if(intersect != 0){
+	    				SMEl el_ = new SMEl(i, j, intersect);
+	    				cur.matrix.addLast(el_);
+	    			}
 				}
 			}
 			return cur;
