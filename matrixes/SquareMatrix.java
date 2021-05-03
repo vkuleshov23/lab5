@@ -12,11 +12,11 @@ public class SquareMatrix extends Matrix implements IMatrix{
 		super(n,n);
 	}
 	public final int getSize(){
-		return col_size;
+		return colSize;
 	}
 	@ Override
 	public SquareMatrix sum( IMatrix tmp){
-			if ((this.col_size == tmp.getColumnSize())&&(this.row_size == tmp.getRowSize())){
+			if ((this.colSize == tmp.getColumnSize())&&(this.rowSize == tmp.getRowSize())){
 				SquareMatrix cur = new SquareMatrix(this.getSize(), 0);
 				for(int i = 0; i < this.getSize(); i++){
 					for(int j = 0; j < this.getSize(); j++){
@@ -28,7 +28,7 @@ public class SquareMatrix extends Matrix implements IMatrix{
 	}
 	@ Override
 	public SquareMatrix product( IMatrix tmp){	
-			if (this.row_size == tmp.getColumnSize()){
+			if (this.rowSize == tmp.getColumnSize()){
 				SquareMatrix cur = new SquareMatrix(this.getSize(), 0);
 				for(int i = 0; i < this.getColumnSize(); i++){
 					for(int j = 0; j < this.getRowSize(); j++){

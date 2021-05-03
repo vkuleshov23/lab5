@@ -2,45 +2,39 @@ package prog.lab5.matrixes;
 import prog.lab5.excpt.*;
 import prog.lab5.interfaces.*;
 public class Matrix implements IMatrix{
-	protected int col_size = 0;
-	protected int row_size = 0;
+	protected int colSize = 0;
+	protected int rowSize = 0;
 	protected int[][] matrix;
 
 	public Matrix(int column, int row) { 
-		this.col_size = column;
-		this.row_size = row;
-		this.matrix = new int[col_size][row_size];
+		this.colSize = column;
+		this.rowSize = row;
+		this.matrix = new int[colSize][rowSize];
 	}
 	@ Override
 	public final void setElement(int column, int row, int value){
-		if((row < this.row_size && row >= 0) || (column >= 0 && column < this.col_size)){
+		if((row < this.rowSize && row >= 0) || (column >= 0 && column < this.colSize)){
 			this.matrix[column][row] = value;
 		} else { MatrixException e = new MatrixException("Memory access error"); throw e;}
 	}
 	@ Override
-	public final void addElement(int column, int row, int value){
-		if((row < this.row_size && row >= 0) || (column >= 0 && column < this.col_size)){
-			this.matrix[column][row] += value;
-		} else { MatrixException e = new MatrixException("Memory access error"); throw e; }	
-	}
-	@ Override
 	public final int getElement(int column, int row){
-		if((row < this.row_size && row >= 0) || (column >= 0 && column < this.col_size)){
+		if((row < this.rowSize && row >= 0) || (column >= 0 && column < this.colSize)){
 			return this.matrix[column][row];
 		} else { MatrixException e = new MatrixException("Memory access error"); throw e; }
 	}
 	@ Override
 	public final int getColumnSize(){
-		return this.col_size;
+		return this.colSize;
 	}
 	@ Override
 	public final int getRowSize(){
-		return this.row_size;
+		return this.rowSize;
 	}
 	public final int[] getColumn(int row){
-		if (row < this.row_size && row >= 0){
-			int[] tmp = new int[this.col_size];
-			for (int i = 0; i < this.col_size; i++) {
+		if (row < this.rowSize && row >= 0){
+			int[] tmp = new int[this.colSize];
+			for (int i = 0; i < this.colSize; i++) {
 				tmp[i] = this.matrix[i][row];
 			}
 			return tmp;
@@ -49,9 +43,9 @@ public class Matrix implements IMatrix{
 		}
 	}
 	public final int[] getRow(int column){
-		if (column < this.col_size && column >= 0){
-			int[] tmp = new int[this.row_size];
-			for (int j = 0; j < this.row_size; j++) {
+		if (column < this.colSize && column >= 0){
+			int[] tmp = new int[this.rowSize];
+			for (int j = 0; j < this.rowSize; j++) {
 				tmp[j] = this.matrix[column][j];
 			}
 			return tmp;
@@ -61,10 +55,10 @@ public class Matrix implements IMatrix{
 	}
 	@ Override
 	public Matrix sum(IMatrix tmp){	
-			if ((this.col_size == tmp.getColumnSize())&&(this.row_size == tmp.getRowSize())){
-				Matrix cur = new Matrix(this.col_size, this.row_size);
-				for(int i = 0; i < this.col_size; i++){
-					for(int j = 0; j < this.row_size; j++){
+			if ((this.colSize == tmp.getColumnSize())&&(this.rowSize == tmp.getRowSize())){
+				Matrix cur = new Matrix(this.colSize, this.rowSize);
+				for(int i = 0; i < this.colSize; i++){
+					for(int j = 0; j < this.rowSize; j++){
 						cur.matrix[i][j] = this.matrix[i][j] + tmp.getElement(i, j);
 					}
 				}
@@ -73,11 +67,11 @@ public class Matrix implements IMatrix{
 	}
 	@ Override
 	public Matrix product(IMatrix tmp){
-			if (this.row_size == tmp.getColumnSize()){
-				Matrix cur = new Matrix(this.col_size, tmp.getRowSize());
-				for(int i = 0; i < cur.col_size; i++){
-					for(int j = 0; j < cur.row_size; j++){
-						for (int k = 0; k < this.row_size; k++) {
+			if (this.rowSize == tmp.getColumnSize()){
+				Matrix cur = new Matrix(this.colSize, tmp.getRowSize());
+				for(int i = 0; i < cur.colSize; i++){
+					for(int j = 0; j < cur.rowSize; j++){
+						for (int k = 0; k < this.rowSize; k++) {
 							cur.matrix[i][j] += (this.matrix[i][k] * tmp.getElement(k, j));
 						}
 					}

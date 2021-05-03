@@ -43,67 +43,20 @@ public class main{
 
 		
 			System.out.println("-------------------Sparse Matrix check-----------------------");
-			SparseMatrix ab = new SparseMatrix();
-			ab.setElement(4, 2, 42);
-			ab.setElement(0, 1, 1);
-			ab.setElement(2, 2, 22);
-			ab.setElement(3, 2, 32);
-			ab.setElement(1, 2, 12);
-			ab.setElement(1, 0, 10);
-			ab.setElement(5, 3, 53);
-			System.out.println("ab size: " + ab.getColumnSize() + " " + ab.getRowSize() + "\nab: \n" + ab);
-						
-			System.out.println("ab+(c+a):\n" + ab.sum(c.sum(a)));
-			
-			System.out.println("ab+ab:\n" + ab.sum(ab));
-			
-			ab.setElement(0, 5, 5);
-			System.out.println("''with more size'' ab:\n" + ab);
-			
-			System.out.println("ab*a1:\n" + ab.product(a1));
-			
-			ab.remove(0, 5);
-			ab.remove(5, 3);
-			System.out.println("remove elements (0 5, 5 3, then shrinkToFit())");
-			System.out.println("ab size: " + ab.getColumnSize() + " " + ab.getRowSize() + "\nab: \n" + ab);
-			ab.shrinkToFit();
-			System.out.println("ab size: " + ab.getColumnSize() + " " + ab.getRowSize() + "\nab: \n" + ab);
-			
-			System.out.println("ab*b:\n" + ab.product(b));
-			
-			ab.setElement(max, max, 1111);
-			ab.starFill(max);
-			System.out.println("ab size: " + ab.getColumnSize() + " " + ab.getRowSize() + "\nab: \n" + ab);
-			
-			Matrix ac = new Matrix(max+1, max+1);
-			ac.starFill(max);
-			// System.out.println("ac size: " + ac.getColumnSize() + " " + ac.getRowSize() + "\nac: \n" + ac);
-			
-			// System.out.println("ab+ac:\n" + ab.sum(ac));
-			
-			// System.out.println("ab+ac:\n" + ab.sum(ac));
-			
-			// System.out.println("ab*ac:\n" + ab.product(ac));
-			
-			// System.out.println("ac*ab:\n" + ac.product(ab));
-			
-			// System.out.println("ac*ac:\n" + ac.product(ac));
-			
-			ac.fill(max);
-			System.out.println("ac size: " + ac.getColumnSize() + " " + ac.getRowSize() + "\nac: \n" + ac);
-			ab.removeAll();
-			ab.fill(max);
-			System.out.println("ab size: " + ab.getColumnSize() + " " + ab.getRowSize() + "\nab: \n" + ab);
 
-			ab.removeAll();
-			ab.shrinkToFit();
-			System.out.println("(removeAll && shrinkToFit)ab size: " + ab.getColumnSize() + " " + ab.getRowSize() + "\nab: \n" + ab);
-			
-			SparseMatrix vw = new SparseMatrix(1, 1);
-			vw.setElement(0, 0, 3);
-			System.out.println("vw:\n" + vw);
-			System.out.println("vw+vw:\n" + vw.sum(vw));
-			System.out.println("vw*vw:\n" + vw.product(vw));
+			long start = System.currentTimeMillis();
+			SparseMatrix t1 = new SparseMatrix(4, 6);
+			t1.setElement(0, 1, 1);
+			t1.setElement(3, 2, 2);
+			t1.setElement(3, 5, 3);
+			t1.setElement(1, 2, 6);
+			t1.setElement(2, 3, 7);
+			t1.setElement(0, 5, 9);
+			// t1.fill(3);
+			System.out.println("t1: \n" + t1);
+			System.out.println("t1*a1: \n" + t1.product(a1));
+			long end = System.currentTimeMillis();
+			System.out.println("Passed " + (end - start) + " millis");
 
 			System.out.println("-------------------Square Matrix check-----------------------");
 			
@@ -140,38 +93,41 @@ public class main{
 			System.out.println("v*v:\n" + v.product(v));
 
 
-			System.out.println("-------------------Matrix Equals check-----------------------");
-		
+			System.out.println("-------------------Sparse Matrix HS check-----------------------");
+			SparseMatrixHS u1 = new SparseMatrixHS(6, 4);
+			u1.setElement(0,0,1);
+			u1.setElement(0,1,2);
+			u1.setElement(1,0,3);
+			u1.setElement(1,2,12);
+			u1.setElement(2,0,34);
+			System.out.println("u1:\n" + u1);
+			System.out.println("1, 1:  " + u1.getElement(1,1));
+			System.out.println("0, 0:  " + u1.getElement(0,0));
 
-			System.out.println("a == b? : " + a.equals(b));
-			System.out.println("a+c == c+a? : " + (c.sum(a)).equals(a.sum(c)));
-			System.out.println("d == e? : " + d.equals(e));
-			System.out.println("d == a? (different classes) : " + d.equals(a));
+			start = System.currentTimeMillis();
+			
+			SparseMatrixHS u2 = new SparseMatrixHS(4, 6);
+			u2.setElement(0, 1, 1);
+			u2.setElement(3, 2, 2);
+			u2.setElement(3, 5, 3);
+			u2.setElement(1, 2, 6);
+			u2.setElement(2, 3, 7);
+			u2.setElement(0, 5, 9);
+			System.out.println("u2:\n" + u2);
+
+			// System.out.println("u1+u2:\n" + u1.sum(u2));
+
+			System.out.println("u1*u2:\n" + u2.product(a1));
+
+			end = System.currentTimeMillis();
+			System.out.println("Passed " + (end - start) + " millis");
+
+
+			System.out.println("-------------------Matrix Equals check-----------------------");
 
 			// System.out.println("-------------------Exception check-----------------------");
 			// System.out.println("c+b(must be error):\n");
 			// c.sum(b);
-
-			SparseMatrix kk = new SparseMatrix();
-			kk.setElement(0, 0, 2);
-			kk.setElement(0, 1, 3);
-			kk.setElement(0, 2, 4);
-			kk.setElement(1, 0, 5);
-			kk.setElement(1, 1, 6);
-			kk.setElement(1, 2, 7);
-			System.out.println("kk:\n" + kk);
-
-			SparseMatrix ko = new SparseMatrix();
-			ko.setElement(0, 0, 9);
-			ko.setElement(0, 1, 8);
-			ko.setElement(1, 0, 7);
-			ko.setElement(1, 1, 6);
-			ko.setElement(2, 0, 5);
-			ko.setElement(2, 1, 4);
-			System.out.println("ko:\n" + ko);
-			System.out.println("kk*ko:\n" + kk.product(ko));
-
-
 
 		} catch(MatrixException err){
 			err.getMassage();
