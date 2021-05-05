@@ -45,16 +45,17 @@ public class main{
 			System.out.println("-------------------Sparse Matrix check-----------------------");
 
 			long start = System.currentTimeMillis();
-			SparseMatrix t1 = new SparseMatrix(4, 6);
-			t1.setElement(0, 1, 1);
-			t1.setElement(3, 2, 2);
-			t1.setElement(3, 5, 3);
-			t1.setElement(1, 2, 6);
-			t1.setElement(2, 3, 7);
-			t1.setElement(0, 5, 9);
+			SparseMatrix t1 = new SparseMatrix(50, 50);
+			t1.fill(49);
 			// t1.fill(3);
 			System.out.println("t1: \n" + t1);
-			System.out.println("t1*a1: \n" + t1.product(a1));
+			// System.out.println("t1*a1: \n" + t1.product(a1));
+			SparseMatrix t2 = new SparseMatrix(50, 50);
+			t2.fill(49);
+			System.out.println("t2: \n" + t2);
+			System.out.println("t1+t2: \n" + t1.sum(t2));
+			System.out.println("t1*t2: \n" + t1.product(t2));
+			System.out.println("t2*t1: \n" + t2.product(t1));
 			long end = System.currentTimeMillis();
 			System.out.println("Passed " + (end - start) + " millis");
 
@@ -94,30 +95,23 @@ public class main{
 
 
 			System.out.println("-------------------Sparse Matrix HS check-----------------------");
-			SparseMatrixHS u1 = new SparseMatrixHS(6, 4);
-			u1.setElement(0,0,1);
-			u1.setElement(0,1,2);
-			u1.setElement(1,0,3);
-			u1.setElement(1,2,12);
-			u1.setElement(2,0,34);
+			SparseMatrixHS u1 = new SparseMatrixHS(50, 50);
+			u1.fill(49);
 			System.out.println("u1:\n" + u1);
 			System.out.println("1, 1:  " + u1.getElement(1,1));
 			System.out.println("0, 0:  " + u1.getElement(0,0));
 
 			start = System.currentTimeMillis();
 			
-			SparseMatrixHS u2 = new SparseMatrixHS(4, 6);
-			u2.setElement(0, 1, 1);
-			u2.setElement(3, 2, 2);
-			u2.setElement(3, 5, 3);
-			u2.setElement(1, 2, 6);
-			u2.setElement(2, 3, 7);
-			u2.setElement(0, 5, 9);
+			SparseMatrixHS u2 = new SparseMatrixHS(50, 50);
+			u2.fill(49);
 			System.out.println("u2:\n" + u2);
 
 			// System.out.println("u1+u2:\n" + u1.sum(u2));
 
-			System.out.println("u1*u2:\n" + u2.product(a1));
+			System.out.println("u1+u2: \n" + u1.sum(u2));
+			System.out.println("u2*u1:\n" + u2.product(u1));
+			System.out.println("u1*u2:\n" + u1.product(u2));
 
 			end = System.currentTimeMillis();
 			System.out.println("Passed " + (end - start) + " millis");

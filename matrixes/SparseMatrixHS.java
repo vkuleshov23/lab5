@@ -84,19 +84,28 @@ public class SparseMatrixHS implements IMatrix{
 	@Override
 	public final SparseMatrixHS product( IMatrix tmp){
 		if (this.rowSize == tmp.getColumnSize()){
-				SparseMatrixHS cur = new SparseMatrixHS(this.getColumnSize(), tmp.getRowSize());
-				for(int i = 0; i < cur.getColumnSize(); i++){
-					for(int j = 0; j < cur.getRowSize(); j++){
-						int res = 0;
-						for (int k = 0; k < this.getRowSize(); k++) {
-							res += this.getElement(i, k) * tmp.getElement(k, j);
-						}
-						if(res != 0)
-							cur.setElement(i, j, res);
+			SparseMatrixHS cur = new SparseMatrixHS(this.getColumnSize(), tmp.getRowSize());
+			for(int i = 0; i < cur.getColumnSize(); i++){
+				for(int j = 0; j < cur.getRowSize(); j++){
+					int res = 0;
+					for (int k = 0; k < this.getRowSize(); k++) {
+						res += this.getElement(i, k) * tmp.getElement(k, j);
 					}
+					if(res != 0)
+						cur.setElement(i, j, res);
 				}
-				return cur;
-			} else { MatrixException e = new MatrixException("Matrix sizes are different"); throw e; }
+			}
+			return cur;
+		} else { MatrixException e = new MatrixException("Matrix sizes are different"); throw e; }
+	}
+	public final void fill(int max){
+		for (int i = 0; i <= max; i++) {
+			for (int j = 0; j <= max; j++) {
+				if(i != j){
+					this.setElement(i, j, (int)(Math.random()* 9) + 1);
+				}
+			}
+		}
 	}
 	@ Override
 	public String toString(){ 
